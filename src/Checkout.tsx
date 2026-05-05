@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ShieldAlert, AlertTriangle, Lock, EyeOff, CheckCircle2, ArrowRight, Zap, XOctagon, Loader2 } from 'lucide-react';
+import { 
+  ShieldAlert, 
+  AlertTriangle, 
+  Lock, 
+  CheckCircle2, 
+  ArrowRight, 
+  Zap, 
+  XOctagon, 
+  Loader2, 
+  ShieldCheck, 
+  CreditCard, 
+  AlertCircle,
+  Flame
+} from 'lucide-react';
 
 export default function Checkout() {
   const [isHovering, setIsHovering] = useState(false);
@@ -8,99 +21,114 @@ export default function Checkout() {
 
   const handleCheckout = () => {
     setIsLoading(true);
-    // Simula loading antes do checkout
-    setTimeout(() => {
-      setIsLoading(false);
-      // Aqui entraria o redirecionamento para Stripe/Pagar.me
-    }, 1500);
+    setTimeout(() => setIsLoading(false), 1500);
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0B] text-slate-200 selection:bg-purple-500/30 font-sans overflow-x-hidden relative">
+    <div className="min-h-screen bg-[#0B0B0B] text-slate-200 selection:bg-purple-500/30 font-sans overflow-x-hidden relative pb-20">
       {/* Background Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full mix-blend-screen" />
         <div className="absolute top-[40%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full mix-blend-screen" />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 py-12 flex flex-col gap-10">
+      <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 py-12 flex flex-col gap-10">
         
-        {/* 1. TOPO (REATIVAR EMOÇÃO) */}
+        {/* 1. TOPO (REFORÇO EMOCIONAL MAIS FORTE) */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-4"
+          className="text-center"
         >
-          <p className="text-slate-400 font-medium mb-4 text-sm sm:text-base uppercase tracking-wider">Você quase entrou em um token assim 👇</p>
-          <div className="bg-[#0d0d12]/80 backdrop-blur-md border border-red-500/30 rounded-2xl p-6 shadow-[0_0_40px_rgba(239,68,68,0.15)] text-left max-w-md mx-auto">
-            <div className="flex justify-between items-center mb-4 pb-4 border-b border-red-500/20">
-              <div className="flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-red-500" />
-                <span className="text-white font-bold">Resultado recente</span>
+          <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 px-5 py-3 rounded-full mb-8 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <span className="text-red-400 font-black text-sm sm:text-base uppercase tracking-wider">Você quase comprou um token com alto risco</span>
+          </div>
+
+          <div className="bg-[#0d0d12]/80 backdrop-blur-md border border-red-500/40 rounded-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(239,68,68,0.2)] text-left w-full mx-auto relative overflow-hidden transform hover:scale-[1.01] transition-transform">
+            <div className="absolute top-0 right-0 p-24 bg-red-500/10 blur-[50px] rounded-full pointer-events-none" />
+            
+            <div className="flex justify-between items-center mb-6 pb-5 border-b border-red-500/20 relative z-10">
+              <div className="flex items-center gap-3">
+                <ShieldAlert className="w-7 h-7 text-red-500" />
+                <span className="text-white font-extrabold text-xl">Resultado da análise</span>
               </div>
-              <div className="bg-red-500/20 text-red-400 px-3 py-1 rounded-lg text-sm font-bold border border-red-500/20">
+              <div className="bg-red-500 text-white px-4 py-1.5 rounded-lg text-sm sm:text-base font-black shadow-[0_0_15px_rgba(239,68,68,0.6)]">
                 Nota: 3/10 — Alto risco
               </div>
             </div>
-            <ul className="space-y-3">
-              <li className="flex gap-3 text-red-200/80 text-sm">
-                <XOctagon className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+            
+            <ul className="space-y-5 relative z-10">
+              <li className="flex gap-4 text-red-200/90 text-base sm:text-lg">
+                <XOctagon className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
                 <span>Liquidez <strong>não travada</strong></span>
               </li>
-              <li className="flex gap-3 text-red-200/80 text-sm">
-                <XOctagon className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+              <li className="flex gap-4 text-red-200/90 text-base sm:text-lg">
+                <XOctagon className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
                 <span>Dono ainda controla o contrato</span>
               </li>
-              <li className="flex gap-3 text-red-200/80 text-sm">
-                <XOctagon className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                <span>Alto risco de não conseguir vender</span>
+              <li className="flex gap-4 text-red-200/90 text-base sm:text-lg">
+                <XOctagon className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
+                <span><strong>Alto risco de não conseguir vender</strong></span>
               </li>
             </ul>
           </div>
         </motion.div>
 
-        {/* 2. HEADLINE (FORTE) */}
-        <header className="text-center space-y-4">
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-[1.1]">
-            Você pode estar comprando um <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">golpe agora</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-medium">
-            Evite perder dinheiro antes mesmo de investir.
+        {/* 6. PROVA SIMPLES (CREDIBILIDADE) */}
+        <div className="text-center bg-white/5 border border-white/10 rounded-xl p-5 sm:p-6 shadow-inner">
+          <p className="text-slate-300 font-medium leading-relaxed text-base sm:text-lg">
+            <strong className="text-white font-bold">Golpes em tokens acontecem todos os dias.</strong><br/>
+            Muitos investidores só descobrem depois que não conseguem vender.
           </p>
-        </header>
+        </div>
 
-        {/* 3. BLOCO PRINCIPAL (OFERTA) & 5. CTA */}
+        {/* 2. PREÇO COM URGÊNCIA */}
         <motion.section 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
           className="relative group"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-60 transition duration-1000"></div>
-          <div className="relative bg-[#0d0d12]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl flex flex-col items-center text-center">
+          <div className="absolute -inset-1 bg-gradient-to-b from-blue-600 to-purple-600 rounded-[2rem] blur-xl opacity-60 group-hover:opacity-80 transition duration-1000"></div>
+          <div className="relative bg-[#0a0a0f] border border-white/10 rounded-[2rem] p-8 sm:p-12 shadow-2xl flex flex-col items-center text-center">
             
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-bold mb-6 uppercase tracking-wider">
-                <Zap className="w-4 h-4" />
-                <span>Acesso Antecipado</span>
-              </div>
-              
+            <div className="mb-6">
               <div className="flex flex-col items-center justify-center">
-                <span className="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">R$ 19,90</span>
-                <span className="text-xl text-slate-400 font-medium mt-1">/ mês</span>
-              </div>
-              <div className="mt-4 bg-orange-500/10 border border-orange-500/20 text-orange-400 px-4 py-2 rounded-lg inline-block font-semibold">
-                Preço de fundador (vai aumentar após lançamento)
+                <span className="text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-300 tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                  R$ 19,90
+                </span>
+                <span className="text-2xl text-slate-400 font-bold mt-2">/ mês</span>
               </div>
             </div>
 
-            <div className="w-full mt-4">
+            {/* 5. JUSTIFICATIVA DE PREÇO */}
+            <div className="mb-8">
+              <p className="text-emerald-400 font-bold text-sm sm:text-base bg-emerald-400/10 px-5 py-3 rounded-xl border border-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.1)]">
+                Menos do que o valor que você pode perder em um único token errado
+              </p>
+            </div>
+
+            <div className="w-full flex flex-col gap-3 mb-10">
+              <div className="flex items-center gap-3 bg-orange-500/10 border border-orange-500/30 text-orange-400 px-5 py-4 rounded-xl text-sm sm:text-base text-left shadow-inner">
+                <Flame className="w-6 h-6 shrink-0" />
+                <span className="font-bold">Preço de fundador (válido para os primeiros usuários)</span>
+              </div>
+              <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 text-red-400 px-5 py-4 rounded-xl text-sm sm:text-base text-left shadow-inner">
+                <AlertCircle className="w-6 h-6 shrink-0" />
+                <span className="font-bold">Esse valor será reajustado após o lançamento</span>
+              </div>
+            </div>
+
+            {/* 3. CTA */}
+            <div className="w-full relative">
+              <div className="absolute inset-0 bg-purple-500 blur-2xl opacity-40 rounded-full pointer-events-none"></div>
               <button 
                 onClick={handleCheckout}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 disabled={isLoading}
-                className="w-full py-5 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-2xl font-black text-xl sm:text-2xl shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.8)] transition-all flex items-center justify-center gap-3 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                className="relative w-full py-6 px-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] hover:bg-[position:100%_0] text-white rounded-2xl font-black text-xl sm:text-2xl shadow-[0_0_40px_rgba(168,85,247,0.7)] transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none duration-300"
               >
                 {isLoading ? (
                   <Loader2 className="w-8 h-8 animate-spin" />
@@ -113,104 +141,67 @@ export default function Checkout() {
               </button>
             </div>
 
-            {/* 6. SEGURANÇA PSICOLÓGICA */}
-            <div className="mt-8 flex flex-wrap justify-center gap-4 sm:gap-8 border-t border-white/5 pt-8 w-full">
-              <div className="flex items-center gap-2 text-slate-400">
-                <Lock className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm font-medium">Pagamento 100% seguro</span>
+            {/* 7. VELOCIDADE / FACILIDADE */}
+            <p className="mt-6 text-slate-300 font-bold text-sm sm:text-base flex items-center justify-center gap-2">
+              <Zap className="w-5 h-5 text-yellow-400" />
+              Leva menos de 1 minuto para garantir acesso
+            </p>
+
+            {/* 4. SEGURANÇA */}
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center border-t border-white/5 pt-8 w-full">
+              <div className="flex items-center gap-2 text-slate-300 justify-center bg-white/5 px-4 py-2 rounded-lg">
+                <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                <span className="text-sm font-bold">Pagamento seguro via plataforma confiável</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-400">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm font-medium">Pix ou Cartão</span>
+            </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-4 sm:gap-6 w-full">
+              <div className="flex items-center gap-2 text-slate-400 bg-white/5 px-4 py-2 rounded-lg">
+                <CreditCard className="w-5 h-5 text-blue-400" />
+                <span className="text-sm font-semibold">Pix e cartão disponíveis</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-400">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm font-medium">Sem compromisso longo</span>
+              <div className="flex items-center gap-2 text-slate-400 bg-white/5 px-4 py-2 rounded-lg">
+                <CheckCircle2 className="w-5 h-5 text-purple-400" />
+                <span className="text-sm font-semibold">Cancelamento simples</span>
               </div>
             </div>
 
           </div>
         </motion.section>
 
-        {/* 4. URGÊNCIA */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 text-orange-400 bg-orange-400/10 border border-orange-400/20 py-4 px-6 rounded-2xl"
-        >
-          <div className="flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 flex-shrink-0" />
-            <p className="font-bold text-center sm:text-left">Apenas alguns usuários terão acesso</p>
-          </div>
-          <div className="hidden sm:block w-1.5 h-1.5 bg-orange-400 rounded-full" />
-          <p className="font-medium text-orange-400/80 text-center sm:text-left">Liberação em etapas • Vagas limitadas</p>
-        </motion.div>
-
-        {/* 8. COMPARAÇÃO */}
-        <section className="grid sm:grid-cols-2 gap-4 mt-4">
-          <div className="bg-red-500/5 border border-red-500/10 rounded-2xl p-6 flex items-center gap-4 hover:bg-red-500/10 transition-colors">
-            <div className="bg-red-500/10 p-3 rounded-full shrink-0">
-              <EyeOff className="w-6 h-6 text-red-400" />
+        {/* 8. BENEFÍCIO DE SER EARLY USER */}
+        <section className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-inner">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
+              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
+              <p className="text-slate-200 font-bold text-base sm:text-lg">Você será um dos primeiros usuários</p>
             </div>
-            <div>
-              <p className="text-slate-400 text-sm font-medium">Sem TokenRay:</p>
-              <p className="text-white font-bold text-lg leading-tight mt-0.5">Você compra no escuro</p>
+            <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
+              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
+              <p className="text-slate-200 font-bold text-base sm:text-lg">Terá acesso antes do público geral</p>
+            </div>
+            <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
+              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
+              <p className="text-slate-200 font-bold text-base sm:text-lg">Poderá influenciar o produto</p>
             </div>
           </div>
-          <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6 flex items-center gap-4 hover:bg-emerald-500/10 transition-colors">
-            <div className="bg-emerald-500/10 p-3 rounded-full shrink-0">
-              <Zap className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <p className="text-slate-400 text-sm font-medium">Com TokenRay:</p>
-              <p className="text-white font-bold text-lg leading-tight mt-0.5">Você entende o risco antes</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 9. BLOCO DE DOR (REFORÇADO) */}
-        <section className="bg-[#0d0d12]/60 border border-white/5 rounded-2xl p-8 sm:p-10 text-center mt-4 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-32 bg-red-500/5 blur-[80px] rounded-full pointer-events-none" />
           
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-8 relative z-10">
-            Se você não verifica isso, <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">você está apostando</span>
-          </h3>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center text-left relative z-10">
-            <div className="flex-1 bg-black/40 hover:bg-black/60 transition-colors rounded-xl p-5 border border-white/5">
-              <XOctagon className="w-6 h-6 text-red-500 mb-3" />
-              <p className="text-slate-300 font-medium leading-snug">Você pode não conseguir vender depois</p>
-            </div>
-            <div className="flex-1 bg-black/40 hover:bg-black/60 transition-colors rounded-xl p-5 border border-white/5">
-              <XOctagon className="w-6 h-6 text-red-500 mb-3" />
-              <p className="text-slate-300 font-medium leading-snug">O criador pode retirar a liquidez e sumir</p>
-            </div>
-            <div className="flex-1 bg-black/40 hover:bg-black/60 transition-colors rounded-xl p-5 border border-white/5">
-              <XOctagon className="w-6 h-6 text-red-500 mb-3" />
-              <p className="text-slate-300 font-medium leading-snug">Você pode perder dinheiro sem entender por quê</p>
-            </div>
+          {/* 9. REFORÇO DE URGÊNCIA */}
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-5 mt-4 shadow-[0_0_20px_rgba(249,115,22,0.1)]">
+            <p className="text-orange-400 font-black text-center text-sm sm:text-base">
+              ⚠️ Vagas limitadas para acesso antecipado (Liberação em etapas)
+            </p>
           </div>
         </section>
 
-        {/* 7. TRANSPARÊNCIA */}
-        <section className="text-center bg-blue-500/5 border border-blue-500/10 rounded-2xl p-6">
-          <p className="text-lg text-white font-medium">
-            Você está garantindo acesso antecipado ao TokenRay
-          </p>
-          <p className="text-slate-400 mt-2 text-sm sm:text-base">
-            O acesso será liberado nas próximas etapas de lançamento.
-          </p>
-        </section>
-
-        {/* 10. POSICIONAMENTO FINAL */}
-        <footer className="text-center pb-12 pt-8">
-          <p className="text-xl text-slate-400 max-w-xl mx-auto leading-relaxed">
+        {/* 10. REFORÇO FINAL DE VALOR */}
+        <footer className="text-center pt-10 pb-8">
+          <p className="text-xl sm:text-2xl text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
             A maioria das pessoas perde dinheiro em cripto por um motivo simples:
             <br />
-            <strong className="text-white font-bold text-2xl mt-2 block">não entende o que está comprando.</strong>
+            <strong className="text-white font-black mt-3 block text-2xl sm:text-3xl">não entende o que está comprando.</strong>
           </p>
-          <div className="inline-block mt-8">
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-black text-3xl">
+          <div className="mt-10 bg-blue-500/10 border border-blue-500/20 py-5 px-8 rounded-2xl inline-block shadow-[0_0_40px_rgba(59,130,246,0.15)] transform hover:scale-[1.02] transition-transform">
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-black text-2xl sm:text-4xl">
               O TokenRay resolve isso em segundos.
             </p>
           </div>
