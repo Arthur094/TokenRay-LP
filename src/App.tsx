@@ -78,6 +78,7 @@ export default function App() {
   
   const [bottomEmail, setBottomEmail] = useState('');
   const [bottomJoined, setBottomJoined] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAnalyze = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,8 +100,9 @@ export default function App() {
   const handleWaitlist = async (e: React.FormEvent, isBottom = false) => {
     e.preventDefault();
     const email = isBottom ? bottomEmail : waitlistEmail;
-    if (!email.trim()) return;
+    if (!email.trim() || isSubmitting) return;
 
+    setIsSubmitting(true);
     const scriptURL = import.meta.env.VITE_GOOGLE_SHEETS_URL;
     
     if (scriptURL) {
@@ -123,6 +125,7 @@ export default function App() {
     } else {
       setWaitlistJoined(true);
     }
+    setIsSubmitting(false);
   };
 
 
@@ -327,10 +330,11 @@ export default function App() {
                                 />
                                 <button
                                   type="submit"
-                                  className="w-full py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all flex items-center justify-center gap-2 hover:scale-[1.02]"
+                                  disabled={isSubmitting}
+                                  className={`w-full py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all flex items-center justify-center gap-2 hover:scale-[1.02] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                                 >
-                                  Quero evitar o próximo golpe
-                                  <ArrowRight className="w-4 h-4" />
+                                  {isSubmitting ? 'Enviando...' : 'Quero evitar o próximo golpe'}
+                                  {!isSubmitting && <ArrowRight className="w-4 h-4" />}
                                 </button>
                               </form>
                             ) : (
@@ -637,9 +641,10 @@ export default function App() {
                   />
                   <button
                     type="submit"
-                    className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all whitespace-nowrap hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className={`px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all whitespace-nowrap hover:scale-[1.02] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-                    Quero analisar antes de investir
+                    {isSubmitting ? 'Enviando...' : 'Quero analisar antes de investir'}
                   </button>
                 </form>
               ) : (
