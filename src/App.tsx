@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { 
   Search, 
   ShieldAlert, 
@@ -338,10 +339,14 @@ export default function App() {
                                 </button>
                               </form>
                             ) : (
-                              <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-green-400 flex flex-col items-center justify-center gap-2 animate-in fade-in zoom-in duration-300">
-                                <CheckCircle2 className="w-8 h-8" />
-                                <p className="font-bold">Email registrado com sucesso!</p>
-                                <p className="text-xs text-green-500/70">Avisaremos assim que sua vaga for liberada.</p>
+                              <div className="animate-in fade-in zoom-in duration-300">
+                                <Link
+                                  to="/checkout"
+                                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all flex items-center justify-center gap-2 hover:scale-[1.02]"
+                                >
+                                  Garanta seu acesso antecipado aqui
+                                  <ArrowRight className="w-5 h-5" />
+                                </Link>
                               </div>
                             )}
                           </div>
@@ -626,9 +631,8 @@ export default function App() {
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 tracking-tight drop-shadow-md">
               Não invista no <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">próximo golpe</span>
             </h2>
-            <p className="text-xl text-purple-200 mb-10 font-medium">Acesso antecipado 100% gratuito.</p>
             
-            <div className="max-w-md mx-auto backdrop-blur-xl bg-black/40 p-2 rounded-2xl border border-white/10 shadow-2xl">
+            <div className="max-w-md mx-auto backdrop-blur-xl bg-black/40 p-2 rounded-2xl border border-white/10 shadow-2xl mt-10">
               {!bottomJoined ? (
                 <form onSubmit={(e) => handleWaitlist(e, true)} className="flex flex-col sm:flex-row gap-2">
                   <input
@@ -648,9 +652,13 @@ export default function App() {
                   </button>
                 </form>
               ) : (
-                <div className="bg-green-500/10 rounded-xl p-4 text-green-400 flex items-center justify-center gap-3 animate-in fade-in zoom-in duration-300 border border-green-500/20">
-                  <CheckCircle2 className="w-6 h-6" />
-                  <span className="font-bold text-lg">Acesso prioritário garantido!</span>
+                <div className="animate-in fade-in zoom-in duration-300">
+                  <Link
+                    to="/checkout"
+                    className="w-full block py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all hover:scale-[1.02] text-center"
+                  >
+                    Garanta seu acesso antecipado aqui
+                  </Link>
                 </div>
               )}
             </div>
